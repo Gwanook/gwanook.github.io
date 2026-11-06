@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#ffcf43">
+  <meta name="description" content="路觅导师秋季 Flag 海报：写下新学期的目标、行动与期待，生成你的专属海报。">
+  <title>路觅导师 · 秋季 Flag</title>
+  <link rel="icon" type="image/svg+xml" href="./assets/logo.svg">
+  <link rel="stylesheet" href="./style.css">
+  <script src="./assets/lucide.js" defer></script>
+  <script src="./app.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="./" aria-label="路觅导师秋季 Flag 首页"><img src="./assets/logo.svg" alt="路觅教育" width="139" height="40"></a>
+    <span class="event-title">教师节暨秋季开学动员大会</span>
+    <span class="event-year">2026 <span>/</span> AUTUMN</span>
+  </header>
+  <main class="workspace">
+    <section class="editor" aria-labelledby="page-title">
+      <div class="intro">
+        <p class="eyebrow"><span></span> 师者有光，秋启新程</p>
+        <h1 id="page-title">立个 Flag，<br>一起发光<span class="yellow-dot">。</span></h1>
+      </div>
+      <form id="flag-form" novalidate>
+        <div class="identity-row">
+          <div class="field">
+            <label for="mentor-name">导师姓名</label>
+            <input id="mentor-name" name="name" type="text" maxlength="20" placeholder="你的姓名 / 英文名" autocomplete="name" required>
+          </div>
+          <div class="field">
+            <label for="department">学科组</label>
+            <select id="department" name="department" required>
+              <option value="">请选择</option>
+              <option>财会金融组</option>
+              <option>国课-数学组</option>
+              <option>国课-文科社科组</option>
+              <option>国课-物化生组</option>
+              <option>经商管理组</option>
+              <option>计算机/信息工程/机械工程组</option>
+              <option>人文社科组</option>
+              <option>数统组</option>
+              <option>物化生组</option>
+            </select>
+          </div>
+        </div>
+        <div class="section-label"><h2>我的新学期约定</h2><button type="button" id="inspiration" class="text-button" title="选择一组 Flag 参考"><i data-lucide="lightbulb" aria-hidden="true"></i>找点灵感</button></div>
+        <div class="field pledge-field">
+          <label for="goal"><span class="field-number">01</span>我会在新学期重点做到</label>
+          <div class="textarea-wrap"><textarea id="goal" name="goal" rows="2" maxlength="60" placeholder="把每一堂课，讲到学生真正理解。" required></textarea><span class="counter" id="goal-count">0 / 60</span></div>
+        </div>
+        <div class="field pledge-field">
+          <label for="action"><span class="field-number">02</span>我准备通过</label>
+          <div class="textarea-wrap"><textarea id="action" name="action" rows="3" maxlength="90" placeholder="每周复盘学生的易错点，让下一次讲解更有针对性。" required></textarea><span class="counter" id="action-count">0 / 90</span></div>
+        </div>
+        <div class="field pledge-field">
+          <label for="outcome"><span class="field-number">03</span>我希望帮助学生实现</label>
+          <div class="textarea-wrap"><textarea id="outcome" name="outcome" rows="2" maxlength="60" placeholder="从“我不会”，到“这道题我可以”。" required></textarea><span class="counter" id="outcome-count">0 / 60</span></div>
+        </div>
+        <fieldset class="mascot-picker"><legend>小鹿来助阵</legend><div class="mascot-options">
+          <label class="mascot-option"><input type="radio" name="mascot" value="cheer" checked><span><img src="./assets/cheer.png" alt="" width="46" height="46"><span>元气加油</span><i data-lucide="check" aria-hidden="true"></i></span></label>
+          <label class="mascot-option"><input type="radio" name="mascot" value="heart"><span><img src="./assets/heart.png" alt="" width="46" height="46"><span>暖心陪伴</span><i data-lucide="check" aria-hidden="true"></i></span></label>
+          <label class="mascot-option"><input type="radio" name="mascot" value="ready"><span><img src="./assets/ready.png" alt="" width="46" height="46"><span>认真营业</span><i data-lucide="check" aria-hidden="true"></i></span></label>
+        </div></fieldset>
+        <p class="form-error" id="form-error" role="alert" hidden></p>
+        <div class="actions"><button class="primary-button" id="download" type="submit"><i data-lucide="download" aria-hidden="true"></i><span>生成并下载海报</span></button><button class="icon-button" id="copy" type="button" aria-label="复制 Flag 文案" title="复制 Flag 文案"><i data-lucide="copy" aria-hidden="true"></i></button></div>
+      </form>
+    </section>
+    <section class="preview-area" aria-label="专属海报预览">
+      <div class="preview-topline"><span><span class="live-dot"></span>我的秋季 Flag</span><span>高清竖版</span></div>
+      <div class="poster-frame" id="poster-frame" aria-busy="true">
+        <canvas id="poster" width="1080" height="1620" role="img" aria-label="秋季 Flag 海报预览"></canvas>
+        <div class="loading-overlay" id="loading-overlay">正在准备小鹿…</div>
+      </div>
+      <div class="preview-bottom"><span>把热爱写进新学期</span><span>LUMIST · 2026</span></div>
+      <div class="asset-error" id="asset-error" role="alert" hidden><span>小鹿素材加载失败，请重试。</span><button type="button" id="retry-assets" class="text-button">重新加载</button></div>
+    </section>
+  </main>
+  <footer class="site-footer"><span>路觅导师，懂学生，管结果。</span><span>2026 教师节 · 秋季新程</span></footer>
+  <dialog id="inspiration-dialog" class="inspiration-dialog" aria-labelledby="inspiration-title">
+    <div class="dialog-heading"><h2 id="inspiration-title">从一个小小的行动开始</h2><button type="button" class="icon-button close-dialog" aria-label="关闭"><i data-lucide="x" aria-hidden="true"></i></button></div>
+    <div class="inspiration-list" id="inspiration-list"></div>
+  </dialog>
+  <dialog id="result-dialog" class="result-dialog" aria-labelledby="result-title">
+    <div class="dialog-heading"><div><p class="eyebrow">FLAG 已立，热爱启程</p><h2 id="result-title">你的新学期，开始发光。</h2></div><button type="button" class="icon-button close-dialog" aria-label="关闭"><i data-lucide="x" aria-hidden="true"></i></button></div>
+    <div class="result-image-wrap"><img id="result-image" alt="我的秋季 Flag 海报"></div>
+    <div class="result-actions"><a class="primary-button" id="save-image" download="路觅秋季Flag.png"><i data-lucide="download" aria-hidden="true"></i>保存海报</a><button type="button" id="share-image" class="secondary-button" hidden><i data-lucide="share-2" aria-hidden="true"></i>分享</button></div>
+  </dialog>
+  <div class="toast" id="toast" role="status" hidden></div>
+</body>
+</html>
